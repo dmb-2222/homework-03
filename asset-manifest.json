@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/homework-03/static/css/main.8dee3ed5.chunk.css",
+    "main.js": "/homework-03/static/js/main.7d5eda63.chunk.js",
+    "main.js.map": "/homework-03/static/js/main.7d5eda63.chunk.js.map",
+    "runtime~main.js": "/homework-03/static/js/runtime~main.55f96b23.js",
+    "runtime~main.js.map": "/homework-03/static/js/runtime~main.55f96b23.js.map",
+    "static/css/2.5dbdccff.chunk.css": "/homework-03/static/css/2.5dbdccff.chunk.css",
+    "static/js/2.d96f74f5.chunk.js": "/homework-03/static/js/2.d96f74f5.chunk.js",
+    "static/js/2.d96f74f5.chunk.js.map": "/homework-03/static/js/2.d96f74f5.chunk.js.map",
+    "index.html": "/homework-03/index.html",
+    "precache-manifest.1398cbcde780d62470f21accfac0e60f.js": "/homework-03/precache-manifest.1398cbcde780d62470f21accfac0e60f.js",
+    "service-worker.js": "/homework-03/service-worker.js",
+    "static/css/2.5dbdccff.chunk.css.map": "/homework-03/static/css/2.5dbdccff.chunk.css.map",
+    "static/css/main.8dee3ed5.chunk.css.map": "/homework-03/static/css/main.8dee3ed5.chunk.css.map"
+  }
+}
