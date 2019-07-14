@@ -1,18 +1,12 @@
 import React, { Component} from "react";
 import styles from "../AppPhoto.module.css";
+import PropTypes from 'prop-types';
 
 class Modal extends Component {
   constructor(props) {
     super();
-    // this.backDropRef = createRef();
   }
 
-//   componentWillUnmount() {
-//     window.removeEventListener("keydown", this.handleKeyPress);
-//   }
-  handleKeyPress = e => {
-    this.props.onClose();
-  };
   handleDropClick = e => {
     this.props.onClose();
   };
@@ -35,3 +29,8 @@ class Modal extends Component {
 }
 
 export default Modal;
+
+Modal.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  largeImageUrl: PropTypes.string.isRequired,
+};

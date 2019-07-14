@@ -1,13 +1,14 @@
 import React from "react";
 import PhotoCard from "../PhotoCard/PhotoCard";
 import styles from "../AppPhoto.module.css";
+import PropTypes from "prop-types";
 
-const Gallery = ({ items = [], handleOnClickBigPic,showButtonloadMore, onClickloadMore }) => {
-  // console.log(handleOnClickBigPic);
-  // const { id, webformatURL, largeImageURL, views, comments, downloads } = items;
-  // const arr = [...items, ...onClickloadMore]
-  // console.log(arr)
-
+const Gallery = ({
+  items = [],
+  handleOnClickBigPic,
+  showButtonloadMore,
+  onClickloadMore
+}) => {
   return (
     <>
       <ul className={styles.gallery}>
@@ -33,7 +34,16 @@ const Gallery = ({ items = [], handleOnClickBigPic,showButtonloadMore, onClicklo
           Load more
         </button>
       )}
+      <div id="scroll" />
     </>
   );
 };
+
 export default Gallery;
+
+Gallery.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleOnClickBigPic: PropTypes.func.isRequired,
+  showButtonloadMore: PropTypes.bool,
+  onClickloadMore: PropTypes.func.isRequired
+};

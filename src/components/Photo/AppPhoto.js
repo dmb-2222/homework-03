@@ -50,6 +50,10 @@ class AppPhoto extends React.Component {
           };
         });
       })
+      .then(() => {
+        const scrollToEnd = document.getElementById("scroll");
+        scrollToEnd.scrollIntoView({ behavior: "smooth" });
+      })
       .catch("error");
   };
   render() {
