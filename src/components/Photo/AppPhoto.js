@@ -4,6 +4,7 @@ import SearchForm from "../Photo/SearchForm/SearchForm";
 import Gallery from "../Photo/Gallery/Gallery";
 import Modal from "./Modal/Modal";
 import { restApi, restApiLoadMore } from "./services/restApi/restApi";
+import Loader from "./services/Loader";
 import styles from "./AppPhoto.module.css";
 
 class AppPhoto extends React.Component {
@@ -15,7 +16,8 @@ class AppPhoto extends React.Component {
       hits: [],
       isModalOpen: false,
       largeImageUrl: "",
-      isShowButtonloadMore: false
+      isShowButtonloadMore: false,
+      isLoading: false
     };
   }
   inputSearch = e => {
@@ -26,12 +28,14 @@ class AppPhoto extends React.Component {
   };
   handleSubmite = e => {
     e.preventDefault();
+    this.setState({ isLoading: true });
     this.nextPage = 1;
     restApi(this.state.searchValue)
       .then(({ data }) => {
         this.setState({ hits: data.hits, isShowButtonloadMore: true });
       })
-      .catch("error");
+      .catch("error")
+      .finally(() => this.setState({ isLoading: false }));
   };
   openModal = largeUrl => {
     this.setState({ isModalOpen: true, largeImageUrl: largeUrl });
@@ -61,7 +65,8 @@ class AppPhoto extends React.Component {
       largeImageUrl,
       isModalOpen,
       hits,
-      isShowButtonloadMore
+      isShowButtonloadMore,
+      isLoading
     } = this.state;
     return (
       <div className={styles.app}>
@@ -69,12 +74,16 @@ class AppPhoto extends React.Component {
           onInputChange={this.inputSearch}
           onHandleSubmit={this.handleSubmite}
         />
-        <Gallery
-          items={hits}
-          handleOnClickBigPic={this.openModal}
-          onClickloadMore={this.loadMore}
-          showButtonloadMore={isShowButtonloadMore}
-        />
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <Gallery
+            items={hits}
+            handleOnClickBigPic={this.openModal}
+            onClickloadMore={this.loadMore}
+            showButtonloadMore={isShowButtonloadMore}
+          />
+        )}
         {isModalOpen && (
           <Modal largeImageUrl={largeImageUrl} onClose={this.closeModal} />
         )}
