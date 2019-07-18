@@ -9,18 +9,20 @@ import LsBankHistory from "../services/Ls/Ls";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+const prevTransactions = LsBankHistory.getBankHistory();
+
 class Dashboard extends React.Component {
   constructor() {
     super();
-    const prevTransactions = LsBankHistory.getBankHistory();
     this.state = {
-      history: prevTransactions.history || [],
-      balance: prevTransactions.balance || 0,
-      deposit: prevTransactions.deposit || 0,
-      withdraw: prevTransactions.withdraw || 0,
+      history: [],
+      balance: 0,
+      deposit: 0,
+      withdraw: 0,
       valueInput: ""
     };
   }
+
   noMoney = () =>
     toast("На счету недостаточно средств для проведения операции!", {
       autoClose: 5000
@@ -28,9 +30,20 @@ class Dashboard extends React.Component {
   unCorrectInput = () =>
     toast("Введите сумму для проведения операции!", { autoClose: 5000 });
 
+  componentDidMount() {
+    if (prevTransactions) {
+      this.setState({
+        history: prevTransactions.history,
+        balance: prevTransactions.balance,
+        deposit: prevTransactions.deposit,
+        withdraw: prevTransactions.withdraw
+      });
+    }
+  }
   componentDidUpdate(prevProps, prevState) {
-    LsBankHistory.setBankHistory(this.state);
-
+    if (prevState.history !== this.state.history) {
+      LsBankHistory.setBankHistory(this.state);
+    }
   }
 
   handleInput = e => {
